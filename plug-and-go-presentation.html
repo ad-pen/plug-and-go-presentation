@@ -5,50 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Plug and Go — Product Development Final Report</title>
 
-    <!-- Fontshare: Clash Display (bold display), Satoshi (body), JetBrains Mono (stats) -->
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@500,700,900&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" />
+    <!-- Fontshare: Clash Display (bold display), Satoshi (clean body), JetBrains Mono (stats) -->
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" />
 
     <style>
     /* ============================================================
-       THEME — Plug & Go Purple (matches the app)
-       Deep midnight purple + vibrant violet + mint accent
-       Sized for projector legibility from the back row.
+       THEME — Electric Voltage (custom)
+       Deep midnight + electric lime + cyan
        ============================================================ */
     :root {
-        --bg-primary: #0a0614;
-        --bg-secondary: #14092a;
-        --bg-tertiary: #1d1140;
-        --text-primary: #ffffff;
-        --text-secondary: #c8bdde;
-        --text-dim: #6e5d96;
+        --bg-primary: #050810;
+        --bg-secondary: #0a1020;
+        --bg-tertiary: #0f1830;
+        --text-primary: #e8f0ff;
+        --text-secondary: #8a9bbc;
+        --text-dim: #4f5d7a;
 
-        --accent-purple: #a855f7;       /* Vivid violet — matches app buttons */
-        --accent-purple-glow: rgba(168, 85, 247, 0.45);
-        --accent-purple-deep: #7c3aed;
-        --accent-lavender: #c4b5fd;     /* Soft lavender highlight */
-        --accent-mint: #34d399;         /* Mint — matches "Available" badges */
-        --accent-warn: #fb7185;
+        --accent-volt: #c4ff3d;          /* Electric lime — primary energy */
+        --accent-volt-glow: rgba(196, 255, 61, 0.35);
+        --accent-cyan: #4ad9ff;          /* Charging blue */
+        --accent-cyan-glow: rgba(74, 217, 255, 0.3);
+        --accent-warn: #ff5a3d;          /* Warning coral */
 
-        --border-line: rgba(168, 85, 247, 0.25);
-        --grid-line: rgba(168, 85, 247, 0.06);
+        --border-line: rgba(196, 255, 61, 0.15);
+        --grid-line: rgba(74, 217, 255, 0.04);
 
         --font-display: "Clash Display", system-ui, sans-serif;
         --font-body: "Satoshi", system-ui, sans-serif;
         --font-mono: "JetBrains Mono", monospace;
 
-        /* TYPOGRAPHY — projector-ready scale */
-        --title-size: clamp(2.5rem, 7.5vw, 6rem);
-        --h2-size: clamp(1.9rem, 4.5vw, 3.6rem);
-        --h3-size: clamp(1.2rem, 2.4vw, 1.9rem);
-        --body-size: clamp(1.05rem, 1.7vw, 1.5rem);
-        --small-size: clamp(0.85rem, 1.2vw, 1.15rem);
-        --stat-size: clamp(2.4rem, 6vw, 5.2rem);
-        --mega-stat-size: clamp(3rem, 8vw, 7rem);
+        --title-size: clamp(1.75rem, 5.5vw, 4.5rem);
+        --h2-size: clamp(1.25rem, 3.2vw, 2.5rem);
+        --h3-size: clamp(0.95rem, 2vw, 1.4rem);
+        --body-size: clamp(0.72rem, 1.2vw, 1rem);
+        --small-size: clamp(0.6rem, 0.95vw, 0.82rem);
+        --stat-size: clamp(1.75rem, 5vw, 4rem);
 
-        --slide-padding: clamp(1.5rem, 4vw, 4rem);
-        --content-gap: clamp(0.8rem, 2.2vw, 2rem);
-        --element-gap: clamp(0.4rem, 1.2vw, 1.2rem);
+        --slide-padding: clamp(1rem, 3.5vw, 3.5rem);
+        --content-gap: clamp(0.5rem, 1.8vw, 1.75rem);
+        --element-gap: clamp(0.3rem, 1vw, 1rem);
 
         --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         --duration-normal: 0.7s;
@@ -65,7 +61,6 @@
         background: var(--bg-primary);
         color: var(--text-primary);
         font-family: var(--font-body);
-        font-weight: 500;
         -webkit-font-smoothing: antialiased;
     }
 
@@ -102,8 +97,14 @@
     }
 
     .card, .container, .content-box {
-        max-width: min(92vw, 1200px);
+        max-width: min(90vw, 1100px);
         max-height: min(82vh, 720px);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+        gap: clamp(0.5rem, 1.5vw, 1rem);
     }
 
     img, .image-container {
@@ -113,7 +114,7 @@
     }
 
     /* ============================================================
-       GLOBAL ATMOSPHERE — purple grid + glow
+       GLOBAL ATMOSPHERE — circuit grid + glow
        ============================================================ */
     body::before {
         content: "";
@@ -132,19 +133,19 @@
         position: fixed;
         inset: 0;
         background:
-            radial-gradient(ellipse at 12% 88%, var(--accent-purple-glow) 0%, transparent 50%),
-            radial-gradient(ellipse at 88% 12%, rgba(196, 181, 253, 0.25) 0%, transparent 45%);
-        opacity: 0.7;
+            radial-gradient(ellipse at 15% 85%, var(--accent-volt-glow) 0%, transparent 45%),
+            radial-gradient(ellipse at 85% 15%, var(--accent-cyan-glow) 0%, transparent 45%);
+        opacity: 0.6;
         pointer-events: none;
         z-index: 1;
     }
 
     /* ============================================================
-       SLIDE HEADER + FOOTER (numbers, section, brand)
+       SLIDE HEADER (number + section label)
        ============================================================ */
     .slide-header {
         position: absolute;
-        top: clamp(1.2rem, 2.5vw, 2rem);
+        top: clamp(1rem, 2.5vw, 2rem);
         left: var(--slide-padding);
         right: var(--slide-padding);
         display: flex;
@@ -153,19 +154,18 @@
         font-family: var(--font-mono);
         font-size: var(--small-size);
         color: var(--text-dim);
-        font-weight: 700;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.15em;
         text-transform: uppercase;
         z-index: 3;
     }
 
     .slide-number {
-        color: var(--accent-purple);
+        color: var(--accent-volt);
         font-weight: 700;
     }
 
     .slide-section {
-        opacity: 0.8;
+        opacity: 0.7;
     }
 
     .slide-footer {
@@ -179,7 +179,6 @@
         font-family: var(--font-mono);
         font-size: var(--small-size);
         color: var(--text-dim);
-        font-weight: 500;
         z-index: 3;
     }
 
@@ -187,72 +186,54 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5em;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: var(--text-secondary);
+        font-weight: 500;
     }
 
     .brand-mark::before {
         content: "";
         display: inline-block;
-        width: 10px;
-        height: 10px;
-        background: var(--accent-purple);
-        box-shadow: 0 0 14px var(--accent-purple-glow);
-        border-radius: 2px;
+        width: 8px;
+        height: 8px;
+        background: var(--accent-volt);
+        box-shadow: 0 0 12px var(--accent-volt);
         animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
         0%, 100% { opacity: 1; }
-        50% { opacity: 0.45; }
+        50% { opacity: 0.4; }
     }
 
     /* ============================================================
-       TYPOGRAPHY — projector-ready, heavy weights
+       TYPOGRAPHY
        ============================================================ */
     h1, h2, h3, h4 {
         font-family: var(--font-display);
         font-weight: 700;
         line-height: 1.05;
-        letter-spacing: -0.025em;
-        color: var(--text-primary);
+        letter-spacing: -0.02em;
     }
 
     h1 { font-size: var(--title-size); }
-    h2 { font-size: var(--h2-size); font-weight: 700; }
-    h3 { font-size: var(--h3-size); font-weight: 700; }
+    h2 { font-size: var(--h2-size); }
+    h3 { font-size: var(--h3-size); font-weight: 600; }
 
-    p, li {
-        font-size: var(--body-size);
-        line-height: 1.55;
-        color: var(--text-secondary);
-        font-weight: 500;
-    }
+    p, li { font-size: var(--body-size); line-height: 1.55; color: var(--text-secondary); }
 
-    .lead {
-        color: var(--text-primary);
-        font-weight: 500;
-        font-size: clamp(1.1rem, 1.9vw, 1.7rem);
-    }
+    .lead { color: var(--text-primary); font-weight: 400; }
 
     .eyebrow {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.2em;
-        color: var(--accent-purple);
+        color: var(--accent-volt);
         margin-bottom: var(--element-gap);
         display: block;
     }
 
-    .accent-purple { color: var(--accent-purple); }
-    .accent-lavender { color: var(--accent-lavender); }
-    .accent-mint { color: var(--accent-mint); }
-
-    strong { color: var(--text-primary); font-weight: 700; }
+    .accent-volt { color: var(--accent-volt); }
+    .accent-cyan { color: var(--accent-cyan); }
 
     /* ============================================================
        REVEAL ANIMATIONS
@@ -303,8 +284,7 @@
     .title-mark {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        color: var(--accent-purple);
-        font-weight: 700;
+        color: var(--accent-volt);
         letter-spacing: 0.3em;
         text-transform: uppercase;
         display: flex;
@@ -316,80 +296,81 @@
         content: "";
         height: 1px;
         width: clamp(2rem, 5vw, 5rem);
-        background: linear-gradient(90deg, transparent, var(--accent-purple));
+        background: linear-gradient(90deg, transparent, var(--accent-volt));
     }
-    .title-mark::after { background: linear-gradient(90deg, var(--accent-purple), transparent); }
-
-    /* Logo wrapper on title — actual app logo on white card */
-    .logo-card {
-        background: #ffffff;
-        padding: clamp(1rem, 2.5vw, 1.8rem) clamp(1.5rem, 4vw, 3rem);
-        border-radius: clamp(12px, 1.8vw, 20px);
-        box-shadow:
-            0 0 60px var(--accent-purple-glow),
-            0 10px 40px rgba(0, 0, 0, 0.3);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logo-card img {
-        height: clamp(60px, 9vw, 110px);
-        width: auto;
-        max-height: none;
-    }
+    .title-mark::after { background: linear-gradient(90deg, var(--accent-volt), transparent); }
 
     .mega-title {
         font-family: var(--font-display);
-        font-size: clamp(3.5rem, 12vw, 10rem);
+        font-size: clamp(3rem, 11vw, 9rem);
         font-weight: 700;
-        line-height: 0.95;
+        line-height: 0.92;
         letter-spacing: -0.04em;
         color: var(--text-primary);
+        position: relative;
     }
 
     .mega-title .charge {
-        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-lavender) 100%);
+        background: linear-gradient(180deg, var(--accent-volt) 0%, var(--accent-cyan) 100%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
+        position: relative;
     }
 
     .title-tag {
         font-family: var(--font-body);
-        font-size: clamp(1.1rem, 2.1vw, 1.8rem);
+        font-size: clamp(0.9rem, 1.6vw, 1.3rem);
         color: var(--text-secondary);
-        font-weight: 500;
-        max-width: 36ch;
+        font-weight: 300;
+        max-width: 38ch;
         margin: 0 auto;
-        line-height: 1.45;
     }
 
     .team-row {
         display: flex;
-        gap: clamp(1rem, 2.8vw, 2.5rem);
+        gap: clamp(0.8rem, 2.5vw, 2.5rem);
         flex-wrap: wrap;
         justify-content: center;
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        color: var(--text-secondary);
-        font-weight: 700;
-        margin-top: clamp(0.6rem, 2vw, 1.8rem);
+        color: var(--text-dim);
+        margin-top: clamp(0.5rem, 2vw, 1.5rem);
     }
 
     .team-row span {
         display: inline-flex;
         align-items: center;
-        gap: 0.5em;
+        gap: 0.4em;
     }
 
     .team-row span::before {
         content: "";
-        width: 6px; height: 6px;
-        background: var(--accent-purple);
+        width: 4px; height: 4px;
+        background: var(--accent-volt);
         display: inline-block;
+    }
+
+    /* ============================================================
+       LOGO MARK (CSS-only — bolt / plug)
+       ============================================================ */
+    .logo-mark {
+        width: clamp(60px, 8vw, 90px);
+        height: clamp(60px, 8vw, 90px);
+        border: 2px solid var(--accent-volt);
         border-radius: 50%;
-        box-shadow: 0 0 8px var(--accent-purple-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 40px var(--accent-volt-glow), inset 0 0 20px rgba(196, 255, 61, 0.1);
+    }
+
+    .logo-mark::before {
+        content: "⚡";
+        font-size: clamp(28px, 4vw, 40px);
+        color: var(--accent-volt);
+        text-shadow: 0 0 16px var(--accent-volt-glow);
     }
 
     /* ============================================================
@@ -405,37 +386,37 @@
     .three-col {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: clamp(0.8rem, 1.8vw, 1.8rem);
+        gap: clamp(0.5rem, 1.5vw, 1.5rem);
     }
 
     .four-col {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: clamp(0.6rem, 1.4vw, 1.4rem);
+        gap: clamp(0.5rem, 1.2vw, 1.2rem);
     }
 
     /* ============================================================
-       STAT CARDS — high-contrast, projector-friendly
+       STAT CARDS
        ============================================================ */
     .stat-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: clamp(0.8rem, 1.8vw, 1.8rem);
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: clamp(0.6rem, 1.5vw, 1.5rem);
         margin-top: var(--content-gap);
     }
 
     .stat-card {
-        padding: clamp(1rem, 2.2vw, 2rem);
-        background: rgba(29, 17, 64, 0.65);
+        padding: clamp(0.8rem, 2vw, 1.8rem);
+        background: rgba(15, 24, 48, 0.5);
         border: 1px solid var(--border-line);
-        border-left: 4px solid var(--accent-purple);
+        border-left: 3px solid var(--accent-volt);
         backdrop-filter: blur(10px);
         transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
     }
 
     .stat-card:hover {
         transform: translateY(-4px);
-        border-left-color: var(--accent-lavender);
+        border-left-color: var(--accent-cyan);
     }
 
     .stat-value {
@@ -443,142 +424,131 @@
         font-size: var(--stat-size);
         font-weight: 700;
         line-height: 1;
-        color: var(--accent-purple);
+        color: var(--accent-volt);
         letter-spacing: -0.03em;
         margin-bottom: 0.2em;
     }
 
-    .stat-value.lavender { color: var(--accent-lavender); }
-    .stat-value.mint { color: var(--accent-mint); }
+    .stat-value.cyan { color: var(--accent-cyan); }
 
     .stat-label {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--text-primary);
+        color: var(--text-secondary);
     }
 
     .stat-sublabel {
         font-size: var(--small-size);
-        color: var(--text-secondary);
-        margin-top: 0.5em;
-        line-height: 1.45;
-        font-weight: 500;
+        color: var(--text-dim);
+        margin-top: 0.4em;
+        line-height: 1.4;
     }
 
     /* ============================================================
        FEATURE CARDS
        ============================================================ */
     .feature-card {
-        padding: clamp(1rem, 2vw, 1.8rem);
-        background: rgba(29, 17, 64, 0.55);
+        padding: clamp(0.8rem, 1.8vw, 1.5rem);
+        background: rgba(15, 24, 48, 0.4);
         border: 1px solid var(--border-line);
-        border-radius: 6px;
+        border-radius: 4px;
         display: flex;
         flex-direction: column;
-        gap: 0.6em;
+        gap: 0.5em;
     }
 
     .feature-card .feature-num {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
-        color: var(--accent-purple);
+        color: var(--accent-volt);
         letter-spacing: 0.15em;
     }
 
     .feature-card h3 {
-        font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+        font-size: clamp(0.85rem, 1.5vw, 1.1rem);
         color: var(--text-primary);
-        font-weight: 700;
+        font-weight: 600;
     }
 
     .feature-card p {
-        font-size: clamp(0.92rem, 1.4vw, 1.2rem);
-        line-height: 1.5;
-        font-weight: 500;
+        font-size: clamp(0.7rem, 1.05vw, 0.85rem);
+        line-height: 1.45;
     }
 
     /* ============================================================
-       BULLET LISTS
+       LISTS
        ============================================================ */
     .bullet-list {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: clamp(0.5rem, 1.3vh, 1rem);
+        gap: clamp(0.4rem, 1.2vh, 0.85rem);
     }
 
     .bullet-list li {
-        padding-left: 1.6em;
+        padding-left: 1.4em;
         position: relative;
         font-size: var(--body-size);
         line-height: 1.5;
         color: var(--text-secondary);
-        font-weight: 500;
     }
 
     .bullet-list li::before {
         content: "→";
         position: absolute;
         left: 0;
-        color: var(--accent-purple);
+        color: var(--accent-volt);
         font-family: var(--font-mono);
         font-weight: 700;
     }
 
     .bullet-list li strong {
         color: var(--text-primary);
-        font-weight: 700;
+        font-weight: 600;
     }
 
     /* ============================================================
-       TABLES — larger, more readable
+       TABLES
        ============================================================ */
     .data-table {
         width: 100%;
         border-collapse: collapse;
-        font-size: clamp(0.9rem, 1.3vw, 1.2rem);
+        font-size: clamp(0.65rem, 1vw, 0.85rem);
         margin-top: var(--element-gap);
     }
 
     .data-table th, .data-table td {
-        padding: clamp(0.5rem, 1vw, 1rem) clamp(0.6rem, 1.2vw, 1.2rem);
+        padding: clamp(0.4rem, 0.9vw, 0.8rem) clamp(0.5rem, 1vw, 1rem);
         text-align: left;
         border-bottom: 1px solid var(--border-line);
     }
 
     .data-table th {
         font-family: var(--font-mono);
-        font-size: clamp(0.8rem, 1.1vw, 1rem);
-        font-weight: 700;
+        font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+        font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--accent-purple);
-        border-bottom: 2px solid var(--accent-purple);
+        color: var(--accent-volt);
+        border-bottom: 1px solid var(--accent-volt);
     }
 
-    .data-table td {
-        color: var(--text-secondary);
-        font-weight: 500;
-    }
+    .data-table td { color: var(--text-secondary); }
     .data-table td.num {
         font-family: var(--font-mono);
         color: var(--text-primary);
         text-align: right;
-        font-weight: 700;
     }
     .data-table td.highlight {
-        color: var(--accent-purple);
-        font-weight: 700;
+        color: var(--accent-volt);
+        font-weight: 600;
     }
     .data-table tr.highlight-row td {
-        background: rgba(168, 85, 247, 0.08);
-        border-bottom: 2px solid var(--accent-purple);
+        background: rgba(196, 255, 61, 0.05);
+        border-bottom: 1px solid var(--accent-volt);
         color: var(--text-primary);
-        font-weight: 700;
     }
 
     /* ============================================================
@@ -594,10 +564,10 @@
 
     .mega-stat .num {
         font-family: var(--font-display);
-        font-size: var(--mega-stat-size);
+        font-size: clamp(2.5rem, 7vw, 5.5rem);
         font-weight: 700;
         line-height: 0.9;
-        background: linear-gradient(135deg, var(--accent-purple), var(--accent-lavender));
+        background: linear-gradient(180deg, var(--accent-volt), var(--accent-cyan));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -607,10 +577,9 @@
     .mega-stat .lbl {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--text-primary);
+        letter-spacing: 0.15em;
+        color: var(--text-secondary);
     }
 
     /* ============================================================
@@ -621,15 +590,15 @@
         margin: 0 auto;
         text-align: center;
         font-family: var(--font-display);
-        font-size: clamp(2rem, 5.5vw, 4.5rem);
-        font-weight: 700;
+        font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+        font-weight: 600;
         line-height: 1.15;
         letter-spacing: -0.025em;
         color: var(--text-primary);
     }
 
     .quote-block .accent {
-        color: var(--accent-purple);
+        color: var(--accent-volt);
     }
 
     /* ============================================================
@@ -638,38 +607,37 @@
     .funnel {
         display: flex;
         flex-direction: column;
-        gap: clamp(0.8rem, 1.5vw, 1.2rem);
+        gap: clamp(0.6rem, 1.2vw, 1rem);
         align-items: center;
         margin-top: var(--content-gap);
     }
 
     .funnel-tier {
-        padding: clamp(1rem, 1.8vw, 1.5rem) clamp(1.2rem, 3vw, 3rem);
+        padding: clamp(0.7rem, 1.5vw, 1.2rem) clamp(1rem, 3vw, 3rem);
         border: 1px solid var(--border-line);
-        background: rgba(29, 17, 64, 0.7);
+        background: rgba(15, 24, 48, 0.6);
         display: flex;
         align-items: center;
-        gap: clamp(1rem, 2.5vw, 2.5rem);
+        gap: clamp(0.8rem, 2vw, 2rem);
         position: relative;
     }
 
-    .funnel-tier.t1 { width: 95%; border-left: 5px solid var(--accent-lavender); }
-    .funnel-tier.t2 { width: 70%; border-left: 5px solid var(--accent-purple); }
-    .funnel-tier.t3 { width: 45%; border-left: 5px solid var(--accent-mint); }
+    .funnel-tier.t1 { width: 92%; border-left: 3px solid var(--accent-cyan); }
+    .funnel-tier.t2 { width: 65%; border-left: 3px solid var(--accent-volt); }
+    .funnel-tier.t3 { width: 40%; border-left: 3px solid var(--accent-warn); }
 
     .funnel-tier .label {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: var(--accent-purple);
+        color: var(--text-dim);
         min-width: 4em;
     }
 
     .funnel-tier .value {
         font-family: var(--font-display);
-        font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+        font-size: clamp(1rem, 2.5vw, 1.8rem);
         font-weight: 700;
         color: var(--text-primary);
     }
@@ -679,7 +647,6 @@
         color: var(--text-secondary);
         margin-left: auto;
         text-align: right;
-        font-weight: 500;
     }
 
     /* ============================================================
@@ -689,115 +656,52 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5em;
-        padding: 0.4em 1em;
-        background: var(--accent-purple);
-        color: #ffffff;
+        padding: 0.35em 0.85em;
+        background: var(--accent-volt);
+        color: var(--bg-primary);
         font-family: var(--font-mono);
         font-size: var(--small-size);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        border-radius: 4px;
     }
+
+    .verdict.cyan { background: var(--accent-cyan); }
 
     /* ============================================================
        CONCEPT COMPARISON
        ============================================================ */
     .concept-card {
-        padding: clamp(1rem, 2vw, 1.8rem);
-        background: rgba(29, 17, 64, 0.6);
+        padding: clamp(0.8rem, 1.8vw, 1.5rem);
+        background: rgba(15, 24, 48, 0.5);
         border: 1px solid var(--border-line);
         display: flex;
         flex-direction: column;
-        gap: 0.7em;
+        gap: 0.6em;
     }
 
     .concept-card.winner {
-        border: 2px solid var(--accent-purple);
-        background: rgba(168, 85, 247, 0.1);
-        box-shadow: 0 0 40px var(--accent-purple-glow);
+        border: 1px solid var(--accent-volt);
+        background: rgba(196, 255, 61, 0.06);
+        box-shadow: 0 0 30px rgba(196, 255, 61, 0.1);
     }
 
     .concept-card .badge {
         font-family: var(--font-mono);
         font-size: var(--small-size);
-        font-weight: 700;
         color: var(--text-dim);
         letter-spacing: 0.2em;
     }
 
-    .concept-card.winner .badge { color: var(--accent-purple); }
-
     .concept-card .score {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 4.5vw, 3rem);
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
         font-weight: 700;
         color: var(--text-primary);
         line-height: 1;
     }
 
-    .concept-card.winner .score { color: var(--accent-purple); }
-
-    /* ============================================================
-       APP SCREENSHOT FRAMES
-       ============================================================ */
-    .screen-row {
-        display: flex;
-        gap: clamp(0.8rem, 1.8vw, 1.8rem);
-        justify-content: center;
-        align-items: flex-end;
-        margin-top: var(--content-gap);
-    }
-
-    .phone {
-        position: relative;
-        border-radius: clamp(20px, 2.2vw, 32px);
-        overflow: hidden;
-        box-shadow:
-            0 0 60px rgba(168, 85, 247, 0.25),
-            0 20px 60px rgba(0, 0, 0, 0.5);
-        background: #ffffff;
-        flex: 0 1 auto;
-        transition: transform 0.4s var(--ease-out-expo);
-        border: 2px solid var(--accent-purple);
-    }
-
-    .phone:hover { transform: translateY(-6px); }
-
-    .phone img {
-        display: block;
-        width: 100%;
-        height: auto;
-        max-height: none;
-    }
-
-    .phone .phone-caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: clamp(0.4rem, 0.8vw, 0.7rem);
-        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85));
-        color: #ffffff;
-        font-family: var(--font-mono);
-        font-size: clamp(0.65rem, 0.95vw, 0.85rem);
-        font-weight: 700;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-
-    .screen-row.three .phone { width: clamp(150px, 22vw, 280px); }
-    .screen-row.four .phone  { width: clamp(120px, 17vw, 220px); }
-    .screen-row.two .phone   { width: clamp(180px, 26vw, 340px); }
-
-    .screen-side {
-        display: flex;
-        gap: clamp(0.6rem, 1.2vw, 1.2rem);
-        justify-content: center;
-        align-items: center;
-    }
-    .screen-side .phone { width: clamp(140px, 19vw, 240px); }
+    .concept-card.winner .score { color: var(--accent-volt); }
 
     /* ============================================================
        PROGRESS BAR
@@ -806,12 +710,12 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px;
+        height: 3px;
         width: 0;
-        background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+        background: linear-gradient(90deg, var(--accent-volt), var(--accent-cyan));
         z-index: 100;
         transition: width 0.2s ease;
-        box-shadow: 0 0 12px var(--accent-purple-glow);
+        box-shadow: 0 0 8px var(--accent-volt-glow);
     }
 
     /* ============================================================
@@ -819,17 +723,17 @@
        ============================================================ */
     .nav-dots {
         position: fixed;
-        right: clamp(1rem, 1.8vw, 1.8rem);
+        right: clamp(0.8rem, 1.5vw, 1.5rem);
         top: 50%;
         transform: translateY(-50%);
         display: flex;
         flex-direction: column;
-        gap: 0.6em;
+        gap: 0.5em;
         z-index: 50;
     }
 
     .nav-dot {
-        width: 10px; height: 10px;
+        width: 8px; height: 8px;
         border-radius: 50%;
         background: var(--text-dim);
         border: none;
@@ -839,38 +743,42 @@
     }
 
     .nav-dot.active {
-        background: var(--accent-purple);
-        box-shadow: 0 0 14px var(--accent-purple-glow);
-        transform: scale(1.5);
+        background: var(--accent-volt);
+        box-shadow: 0 0 10px var(--accent-volt-glow);
+        transform: scale(1.4);
     }
 
     /* ============================================================
-       RESPONSIVE BREAKPOINTS — preserve readability
+       RESPONSIVE BREAKPOINTS
        ============================================================ */
-    @media (max-height: 800px) {
+    @media (max-height: 700px) {
         :root {
-            --slide-padding: clamp(1rem, 3vw, 2.5rem);
-            --content-gap: clamp(0.6rem, 1.8vw, 1.5rem);
-            --title-size: clamp(2rem, 6.5vw, 4.5rem);
-            --h2-size: clamp(1.6rem, 4vw, 3rem);
-            --body-size: clamp(0.95rem, 1.5vw, 1.3rem);
-            --stat-size: clamp(2rem, 5vw, 4rem);
-            --mega-stat-size: clamp(2.5rem, 6.5vw, 5.5rem);
+            --slide-padding: clamp(0.75rem, 3vw, 2rem);
+            --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+            --title-size: clamp(1.4rem, 4.5vw, 3rem);
+            --h2-size: clamp(1.1rem, 3vw, 2rem);
+            --stat-size: clamp(1.5rem, 4vw, 3rem);
         }
     }
 
-    @media (max-height: 650px) {
+    @media (max-height: 600px) {
         :root {
-            --slide-padding: clamp(0.7rem, 2.5vw, 1.5rem);
-            --content-gap: clamp(0.4rem, 1.2vw, 1rem);
-            --title-size: clamp(1.6rem, 5vw, 3rem);
-            --h2-size: clamp(1.3rem, 3.2vw, 2.2rem);
-            --body-size: clamp(0.85rem, 1.3vw, 1.1rem);
+            --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+            --content-gap: clamp(0.3rem, 1vw, 0.7rem);
+            --title-size: clamp(1.2rem, 4vw, 2.2rem);
+            --body-size: clamp(0.65rem, 1.1vw, 0.85rem);
         }
         .nav-dots { display: none; }
     }
 
-    @media (max-width: 800px) {
+    @media (max-height: 500px) {
+        :root {
+            --slide-padding: clamp(0.4rem, 2vw, 1rem);
+            --title-size: clamp(1rem, 3.5vw, 1.6rem);
+        }
+    }
+
+    @media (max-width: 700px) {
         .two-col, .three-col, .four-col {
             grid-template-columns: 1fr;
         }
@@ -878,7 +786,6 @@
         .funnel-tier .desc { text-align: left; margin-left: 0; }
         .funnel-tier.t1, .funnel-tier.t2, .funnel-tier.t3 { width: 100%; }
         .nav-dots { display: none; }
-        .screen-row { flex-wrap: wrap; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -892,7 +799,10 @@
     </style>
 </head>
 <body>
+    <!-- Progress indicator -->
     <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Navigation dots (auto-generated) -->
     <nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
 
     <!-- ====================================================================
@@ -900,9 +810,7 @@
          ==================================================================== -->
     <section class="slide title-slide" data-section="Cover">
         <div class="slide-content">
-            <div class="logo-card reveal">
-                <img src="assets/logo.png" alt="Plug and Go logo" />
-            </div>
+            <div class="logo-mark reveal" aria-hidden="true"></div>
             <div class="title-mark reveal">Product Development · Final Report · 2025</div>
             <h1 class="mega-title reveal">
                 Plug <span class="charge">&amp;</span> Go
@@ -928,12 +836,12 @@
          ==================================================================== -->
     <section class="slide" data-section="Problem">
         <div class="slide-header">
-            <span class="slide-number">01 / 19</span>
+            <span class="slide-number">01 / 18</span>
             <span class="slide-section">The Problem</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">A two-sided infrastructure gap</span>
-            <h2 class="reveal">Jordan's EV growth has outpaced<br>its <span class="accent-purple">charging infrastructure</span>.</h2>
+            <h2 class="reveal">Jordan's EV growth has outpaced<br>its <span class="accent-volt">charging infrastructure</span>.</h2>
             <div class="stat-grid reveal">
                 <div class="stat-card">
                     <div class="stat-value">374:1</div>
@@ -941,13 +849,13 @@
                     <div class="stat-sublabel">Far above international benchmarks.</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value lavender">321</div>
+                    <div class="stat-value cyan">321</div>
                     <div class="stat-label">Public stations nationwide</div>
                     <div class="stat-sublabel">For 120,000+ EVs on the road.</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">~40%</div>
-                    <div class="stat-label">Drivers without home charging</div>
+                    <div class="stat-label">EV drivers without home charging</div>
                     <div class="stat-sublabel">Urban renters &amp; apartment dwellers.</div>
                 </div>
             </div>
@@ -967,33 +875,33 @@
          ==================================================================== -->
     <section class="slide" data-section="Opportunity">
         <div class="slide-header">
-            <span class="slide-number">02 / 19</span>
+            <span class="slide-number">02 / 18</span>
             <span class="slide-section">Market Context</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Jordan, second only to Norway</span>
-            <h2 class="reveal">The market <span class="accent-purple">exploded</span>. The infrastructure didn't.</h2>
+            <h2 class="reveal">The market has <span class="accent-cyan">exploded</span>. The infrastructure has not.</h2>
             <div class="four-col reveal" style="margin-top: var(--content-gap);">
                 <div class="mega-stat">
                     <div class="num">66.5%</div>
-                    <div class="lbl">of new car sales were EVs (Q1 2024)</div>
+                    <div class="lbl">of new car sales were EVs in Q1 2024</div>
                 </div>
                 <div class="mega-stat">
                     <div class="num">120k</div>
-                    <div class="lbl">EVs registered nationwide</div>
+                    <div class="lbl">EVs registered nationwide (Aug 2024)</div>
                 </div>
                 <div class="mega-stat">
                     <div class="num">103%</div>
-                    <div class="lbl">EV fleet growth in 2023</div>
+                    <div class="lbl">EV fleet growth in 2023 alone</div>
                 </div>
                 <div class="mega-stat">
                     <div class="num">2nd</div>
-                    <div class="lbl">globally in EV adoption</div>
+                    <div class="lbl">globally in EV adoption rate</div>
                 </div>
             </div>
-            <p class="reveal lead" style="margin-top: var(--content-gap); text-align: center; max-width: 65ch; margin-left: auto; margin-right: auto;">
-                Jordan's EV boom defines the addressable market —
-                and creates the urgent need for a smarter way to access charging.
+            <p class="reveal lead" style="margin-top: var(--content-gap); text-align: center; max-width: 70ch; margin-left: auto; margin-right: auto;">
+                Jordan's EV adoption defines the addressable market — and creates the urgent need
+                for a smarter, faster way to access charging.
             </p>
         </div>
         <div class="slide-footer">
@@ -1007,14 +915,14 @@
          ==================================================================== -->
     <section class="slide" data-section="Mission">
         <div class="slide-header">
-            <span class="slide-number">03 / 19</span>
+            <span class="slide-number">03 / 18</span>
             <span class="slide-section">Mission Statement</span>
         </div>
         <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
             <span class="eyebrow reveal">Mission</span>
             <p class="quote-block reveal-blur">
                 Plug and Go connects EV drivers in Jordan with nearby charging hosts —
-                making charging <span class="accent">accessible, affordable, and community driven.</span>
+                making reliable charging <span class="accent">accessible, affordable, and community driven.</span>
             </p>
         </div>
         <div class="slide-footer">
@@ -1024,33 +932,34 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 05 — THE SOLUTION + APP PREVIEW
+         SLIDE 05 — THE SOLUTION
          ==================================================================== -->
     <section class="slide" data-section="Solution">
         <div class="slide-header">
-            <span class="slide-number">04 / 19</span>
+            <span class="slide-number">04 / 18</span>
             <span class="slide-section">The Solution</span>
         </div>
         <div class="slide-content">
-            <div class="two-col" style="gap: clamp(1.5rem, 4vw, 4rem);">
-                <div>
-                    <span class="eyebrow reveal">An Airbnb for EV chargers</span>
-                    <h2 class="reveal">Two unmet needs.<br><span class="accent-purple">One dual-sided</span> marketplace.</h2>
-                    <ul class="bullet-list reveal" style="margin-top: var(--content-gap);">
-                        <li><strong>Drivers</strong> reserve nearby private chargers before they arrive — real-time availability, in-app payment, navigation, vehicle-compatible filtering.</li>
-                        <li><strong>Hosts</strong> turn an idle home charger into recurring income — set their own price, control availability, get protected by verification &amp; insurance.</li>
-                        <li><strong>Trust</strong> built in from day one — verified hosts, vehicle-matched drivers, ratings, liability coverage on both sides.</li>
-                    </ul>
+            <span class="eyebrow reveal">An Airbnb for EV chargers</span>
+            <h2 class="reveal">A dual-sided marketplace built for <span class="accent-volt">two unmet needs</span>.</h2>
+            <div class="two-col reveal" style="margin-top: var(--content-gap);">
+                <div class="stat-card" style="border-left-color: var(--accent-cyan);">
+                    <div class="stat-label" style="color: var(--accent-cyan);">For EV Drivers</div>
+                    <h3 style="margin: 0.4em 0;">Predictable, bookable charging</h3>
+                    <p style="font-size: var(--small-size); color: var(--text-secondary); line-height: 1.5;">
+                        Reserve a nearby private charger before you arrive. Real-time availability,
+                        in-app payment, turn-by-turn navigation, vehicle-compatible filtering.
+                        Range anxiety becomes a planning problem instead of a panic.
+                    </p>
                 </div>
-                <div class="screen-side reveal">
-                    <div class="phone">
-                        <img src="assets/app-login.png" alt="Plug and Go login screen" />
-                        <div class="phone-caption">Login</div>
-                    </div>
-                    <div class="phone">
-                        <img src="assets/app-map.png" alt="Nearby charging stations on map" />
-                        <div class="phone-caption">Live Map</div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-label" style="color: var(--accent-volt);">For Charger Hosts</div>
+                    <h3 style="margin: 0.4em 0;">Passive income from idle assets</h3>
+                    <p style="font-size: var(--small-size); color: var(--text-secondary); line-height: 1.5;">
+                        Turn an existing home Level-2 charger into a recurring revenue stream.
+                        Set your own price, control availability, get protected by verification
+                        and insurance. ~4,600 JD/year at 3 sessions/day.
+                    </p>
                 </div>
             </div>
         </div>
@@ -1065,42 +974,42 @@
          ==================================================================== -->
     <section class="slide" data-section="Customer Needs">
         <div class="slide-header">
-            <span class="slide-number">05 / 19</span>
+            <span class="slide-number">05 / 18</span>
             <span class="slide-section">Customer Needs</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Validated through user research</span>
-            <h2 class="reveal">What both sides of the market <span class="accent-purple">actually need.</span></h2>
+            <h2 class="reveal">What both sides of the market <span class="accent-volt">actually need.</span></h2>
             <div class="three-col reveal" style="margin-top: var(--content-gap);">
                 <div class="feature-card">
                     <span class="feature-num">N01</span>
-                    <h3>Reliable access</h3>
+                    <h3>Reliable charging access</h3>
                     <p>A dense network that reduces search time and walking distance.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-num">N02</span>
-                    <h3>Trip planning</h3>
-                    <p>Freedom to run errands and travel with flexibility.</p>
+                    <h3>Better trip planning</h3>
+                    <p>Freedom to run errands and travel with flexibility, supported by abundant locations.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-num">N03</span>
-                    <h3>No range anxiety</h3>
-                    <p>Assurance a charger is available when and where it's needed.</p>
+                    <h3>Reduced range anxiety</h3>
+                    <p>Assurance that a charger will be available when and where it's needed.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-num">N04</span>
                     <h3>Easy-to-use software</h3>
-                    <p>Frictionless booking flow on both driver and host sides.</p>
+                    <p>Smart calendars for hosts, closest-booking flow for drivers — frictionless on both sides.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-num">N05</span>
-                    <h3>Affordable charging</h3>
-                    <p>Cheaper than public stations, still profitable for hosts.</p>
+                    <h3>Affordable alternatives</h3>
+                    <p>Cheaper than public stations while still profitable for hosts.</p>
                 </div>
                 <div class="feature-card">
                     <span class="feature-num">N06</span>
                     <h3>Trust &amp; safety</h3>
-                    <p>Verification, ratings, and liability coverage for both parties.</p>
+                    <p>Verification, ratings, and liability insurance for both parties.</p>
                 </div>
             </div>
         </div>
@@ -1111,137 +1020,58 @@
     </section>
 
     <!-- ====================================================================
-         SLIDE 07 — APP DEMO (full screenshots showcase)
-         ==================================================================== -->
-    <section class="slide" data-section="App Demo">
-        <div class="slide-header">
-            <span class="slide-number">06 / 19</span>
-            <span class="slide-section">Live Prototype</span>
-        </div>
-        <div class="slide-content">
-            <span class="eyebrow reveal">From login to booking in under a minute</span>
-            <h2 class="reveal">The end-to-end driver flow.</h2>
-            <div class="screen-row four reveal" style="margin-top: var(--content-gap);">
-                <div class="phone">
-                    <img src="assets/app-nearby.png" alt="Nearby charging stations list" />
-                    <div class="phone-caption">1 · Browse Stations</div>
-                </div>
-                <div class="phone">
-                    <img src="assets/app-station.png" alt="Station details page" />
-                    <div class="phone-caption">2 · Station Details</div>
-                </div>
-                <div class="phone">
-                    <img src="assets/app-booking.png" alt="Booking and payment" />
-                    <div class="phone-caption">3 · Book &amp; Pay</div>
-                </div>
-                <div class="phone">
-                    <img src="assets/app-history.png" alt="Transaction history" />
-                    <div class="phone-caption">4 · Transaction History</div>
-                </div>
-            </div>
-            <p class="reveal lead" style="margin-top: var(--content-gap); text-align: center; max-width: 70ch; margin-left: auto; margin-right: auto;">
-                Built in Figma after <strong>20 user-tested iterations</strong> — every screen
-                designed to get drivers to charging in 3–5 steps.
-            </p>
-        </div>
-        <div class="slide-footer">
-            <span class="brand-mark">PLUG &amp; GO</span>
-            <span>06 — Prototype Walkthrough</span>
-        </div>
-    </section>
-
-    <!-- ====================================================================
-         SLIDE 08 — HOST SIDE OF THE APP
-         ==================================================================== -->
-    <section class="slide" data-section="Host App">
-        <div class="slide-header">
-            <span class="slide-number">07 / 19</span>
-            <span class="slide-section">The Host Experience</span>
-        </div>
-        <div class="slide-content">
-            <div class="two-col" style="gap: clamp(1.5rem, 4vw, 4rem);">
-                <div class="screen-side reveal">
-                    <div class="phone">
-                        <img src="assets/app-profile.png" alt="Host profile management" />
-                        <div class="phone-caption">Profile</div>
-                    </div>
-                    <div class="phone">
-                        <img src="assets/app-manage-station.png" alt="Charging station management" />
-                        <div class="phone-caption">My Station</div>
-                    </div>
-                </div>
-                <div>
-                    <span class="eyebrow reveal">Built for both sides</span>
-                    <h2 class="reveal">Hosts run their station from <span class="accent-purple">one screen.</span></h2>
-                    <ul class="bullet-list reveal" style="margin-top: var(--content-gap);">
-                        <li>Set <strong>per-hour pricing</strong> and update it any time</li>
-                        <li>Define <strong>availability slots</strong> with a smart scheduler</li>
-                        <li>Accept or decline incoming bookings</li>
-                        <li>Track <strong>earnings, sessions, and ratings</strong> in real time</li>
-                        <li>Estimated income: <strong class="accent-purple">~4,600 JD/year</strong> at 3 sessions/day</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="slide-footer">
-            <span class="brand-mark">PLUG &amp; GO</span>
-            <span>07 — Host Experience</span>
-        </div>
-    </section>
-
-    <!-- ====================================================================
-         SLIDE 09 — CONCEPT SELECTION (AHP)
+         SLIDE 07 — CONCEPT SELECTION (AHP)
          ==================================================================== -->
     <section class="slide" data-section="AHP">
         <div class="slide-header">
-            <span class="slide-number">08 / 19</span>
+            <span class="slide-number">06 / 18</span>
             <span class="slide-section">Concept Selection · AHP</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Analytic Hierarchy Process · Saaty (1980)</span>
-            <h2 class="reveal">Three concepts evaluated. <span class="accent-purple">One clear winner.</span></h2>
+            <h2 class="reveal">Three concepts evaluated. <span class="accent-volt">One clear winner.</span></h2>
             <div class="three-col reveal" style="margin-top: var(--content-gap);">
                 <div class="concept-card winner">
-                    <span class="badge">CONCEPT A · SELECTED</span>
+                    <span class="badge">CONCEPT A — SELECTED</span>
                     <h3>P2P Marketplace</h3>
-                    <p style="font-size: clamp(0.9rem, 1.4vw, 1.2rem);">Asset-light platform connecting drivers with private hosts. 15% commission per session, zero physical infrastructure.</p>
+                    <p style="font-size: var(--small-size);">Asset-light platform connecting drivers with private hosts. 15% commission per session, zero physical infrastructure.</p>
                     <div class="score">8.65<span style="font-size: 0.5em; color: var(--text-dim);"> / 10</span></div>
                     <div class="verdict">SELECTED</div>
                 </div>
                 <div class="concept-card">
                     <span class="badge">CONCEPT B</span>
                     <h3>Neighborhood Co-op</h3>
-                    <p style="font-size: clamp(0.9rem, 1.4vw, 1.2rem);">Local clusters co-investing in shared chargers, managed by a coordinator. Hard to scale beyond a block.</p>
+                    <p style="font-size: var(--small-size);">Local clusters co-investing in shared chargers, managed by a coordinator. Hard to scale beyond a single block.</p>
                     <div class="score">5.90</div>
                 </div>
                 <div class="concept-card">
                     <span class="badge">CONCEPT C</span>
                     <h3>B2B Fleet SaaS</h3>
-                    <p style="font-size: clamp(0.9rem, 1.4vw, 1.2rem);">Software for corporate fleet operators. Narrower segment, slower cycle in an early-stage market.</p>
+                    <p style="font-size: var(--small-size);">Software for corporate fleet operators. Narrower segment, slower sales cycle in early-stage market.</p>
                     <div class="score">5.70</div>
                 </div>
             </div>
-            <p class="reveal" style="margin-top: var(--content-gap); font-family: var(--font-mono); font-size: var(--small-size); color: var(--text-secondary); font-weight: 700;">
-                Consistency Ratio: <span class="accent-purple">CR = 0.018</span> — well below the 0.10 threshold. Judgments are internally consistent.
+            <p class="reveal" style="margin-top: var(--content-gap); font-family: var(--font-mono); font-size: var(--small-size); color: var(--text-dim);">
+                Consistency Ratio: <span class="accent-volt">CR = 0.018</span> — well below the 0.10 threshold. Judgments are internally consistent.
             </p>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>08 — Concept Selection</span>
+            <span>06 — Concept Selection</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 10 — AHP CRITERIA TABLE
+         SLIDE 08 — AHP CRITERIA TABLE
          ==================================================================== -->
     <section class="slide" data-section="AHP Criteria">
         <div class="slide-header">
-            <span class="slide-number">09 / 19</span>
+            <span class="slide-number">07 / 18</span>
             <span class="slide-section">AHP Scoring</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Weighted scoring across five criteria</span>
-            <h2 class="reveal">How <span class="accent-purple">Concept A</span> won where it matters most.</h2>
+            <h2 class="reveal">How <span class="accent-volt">Concept A</span> won across the highest-weighted dimensions.</h2>
             <table class="data-table reveal" style="margin-top: var(--content-gap);">
                 <thead>
                     <tr>
@@ -1297,31 +1127,34 @@
                     </tr>
                 </tbody>
             </table>
+            <p class="reveal" style="margin-top: var(--element-gap); font-size: var(--small-size); color: var(--text-dim);">
+                Concept A is the only concept that delivers market scale, customer value, and scalability simultaneously.
+            </p>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>09 — AHP Detail</span>
+            <span>07 — AHP Detail</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 11 — COMPETITIVE LANDSCAPE
+         SLIDE 09 — COMPETITIVE LANDSCAPE
          ==================================================================== -->
     <section class="slide" data-section="Competition">
         <div class="slide-header">
-            <span class="slide-number">10 / 19</span>
+            <span class="slide-number">08 / 18</span>
             <span class="slide-section">Competitive Landscape</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Where Plug and Go fits in the global market</span>
-            <h2 class="reveal">P2P competitors exist abroad — <span class="accent-purple">none in MENA.</span></h2>
+            <h2 class="reveal">Direct P2P competitors exist abroad — <span class="accent-volt">none in MENA.</span></h2>
             <table class="data-table reveal" style="margin-top: var(--content-gap);">
                 <thead>
                     <tr>
                         <th>Player</th>
                         <th>Model</th>
                         <th>Geography</th>
-                        <th>Gap vs. Plug and Go</th>
+                        <th>Key gap vs. Plug and Go</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1353,28 +1186,32 @@
                         <td>Tesla Supercharger</td>
                         <td>Proprietary fast-charging</td>
                         <td>Global</td>
-                        <td>Tesla-first, no P2P, no hosting</td>
+                        <td>Tesla-first, no P2P, no host monetization</td>
                     </tr>
                 </tbody>
             </table>
+            <p class="reveal lead" style="margin-top: var(--content-gap); max-width: 70ch;">
+                The gap: <strong class="accent-volt">no guaranteed reservations, no MENA P2P, no monetization of urban private chargers.</strong>
+                Plug and Go owns this whitespace.
+            </p>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>10 — Competitor Analysis</span>
+            <span>08 — Competitor Analysis</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 12 — TAM SAM SOM
+         SLIDE 10 — TAM SAM SOM
          ==================================================================== -->
     <section class="slide" data-section="Market Sizing">
         <div class="slide-header">
-            <span class="slide-number">11 / 19</span>
+            <span class="slide-number">09 / 18</span>
             <span class="slide-section">Market Sizing</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">TAM · SAM · SOM</span>
-            <h2 class="reveal">A focused launch in <span class="accent-purple">Amman</span>, with room to grow.</h2>
+            <h2 class="reveal">A focused launch in <span class="accent-volt">Amman</span>, with room to grow.</h2>
             <div class="funnel reveal" style="margin-top: var(--content-gap);">
                 <div class="funnel-tier t1">
                     <span class="label">TAM</span>
@@ -1392,163 +1229,199 @@
                     <span class="desc">Realistic 3-year capture (384 → 672 → 960)</span>
                 </div>
             </div>
-            <p class="reveal lead" style="margin-top: var(--content-gap); text-align: center;">
-                Conservative capture: 2% Y1 → 3.5% Y2 → 5% Y3.
+            <p class="reveal" style="margin-top: var(--content-gap); font-size: var(--small-size); color: var(--text-dim); text-align: center;">
+                Conservative capture: 2% Y1 → 3.5% Y2 → 5% Y3 — consistent with typical marketplace adoption curves.
             </p>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>11 — Market Sizing</span>
+            <span>09 — Market Sizing</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 13 — REAL WIN WORTH IT
+         SLIDE 11 — REAL WIN WORTH IT
          ==================================================================== -->
     <section class="slide" data-section="RWW">
         <div class="slide-header">
-            <span class="slide-number">12 / 19</span>
+            <span class="slide-number">10 / 18</span>
             <span class="slide-section">Real · Win · Worth It</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">McKinsey screening framework</span>
             <h2 class="reveal">Three questions every opportunity must answer.</h2>
             <div class="three-col reveal" style="margin-top: var(--content-gap);">
+                <div class="stat-card" style="border-left-color: var(--accent-volt);">
+                    <span class="stat-label" style="color: var(--accent-volt);">IS IT REAL?</span>
+                    <h3 style="margin: 0.5em 0; color: var(--text-primary);">Yes.</h3>
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        65% of new car sales in Jordan in 2024 were EVs. Drivers already share chargers informally —
+                        the problem and the willingness to pay both exist today.
+                    </p>
+                </div>
+                <div class="stat-card" style="border-left-color: var(--accent-cyan);">
+                    <span class="stat-label" style="color: var(--accent-cyan);">CAN WE WIN?</span>
+                    <h3 style="margin: 0.5em 0; color: var(--text-primary);">Yes.</h3>
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        Defensible edges: smart off-peak scheduling, charger-compatibility filtering,
+                        verified hosts &amp; insurance — none of which public networks offer.
+                    </p>
+                </div>
                 <div class="stat-card">
-                    <span class="stat-label" style="color: var(--accent-purple);">IS IT REAL?</span>
-                    <h3 style="margin: 0.5em 0; color: var(--text-primary);">Yes.</h3>
-                    <p style="font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.5;">
-                        65% of new car sales in Jordan in 2024 were EVs.
-                        Drivers already share chargers informally — willingness to pay exists today.
-                    </p>
-                </div>
-                <div class="stat-card" style="border-left-color: var(--accent-lavender);">
-                    <span class="stat-label" style="color: var(--accent-lavender);">CAN WE WIN?</span>
-                    <h3 style="margin: 0.5em 0; color: var(--text-primary);">Yes.</h3>
-                    <p style="font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.5;">
-                        Defensible edges: smart off-peak scheduling, charger-compatibility
-                        filtering, verified hosts &amp; insurance — none of which public networks offer.
-                    </p>
-                </div>
-                <div class="stat-card" style="border-left-color: var(--accent-mint);">
-                    <span class="stat-label" style="color: var(--accent-mint);">IS IT WORTH IT?</span>
+                    <span class="stat-label">IS IT WORTH IT?</span>
                     <h3 style="margin: 0.5em 0; color: var(--text-primary);">Strongly.</h3>
-                    <p style="font-size: clamp(0.95rem, 1.4vw, 1.2rem); line-height: 1.5;">
-                        <span class="accent-purple">24,200 JD</span> initial investment.
-                        Break-even at <span class="accent-purple">121 users</span>.
-                        Payback in <span class="accent-purple">9.4 months</span>.
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        <span class="accent-volt">24,200 JD</span> initial investment. Break-even at just
+                        <span class="accent-volt">121 users</span>. Payback in <span class="accent-volt">9.4 months</span>.
                     </p>
                 </div>
             </div>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>12 — RWW Framework</span>
+            <span>10 — RWW Framework</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 14 — KANO MODEL
+         SLIDE 12 — KANO MODEL
          ==================================================================== -->
     <section class="slide" data-section="Kano">
         <div class="slide-header">
-            <span class="slide-number">13 / 19</span>
+            <span class="slide-number">11 / 18</span>
             <span class="slide-section">Kano Model</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Feature prioritization</span>
-            <h2 class="reveal">From <span class="accent-lavender">must-have</span> to <span class="accent-purple">delighter</span>.</h2>
+            <h2 class="reveal">From <span class="accent-cyan">must-have</span> to <span class="accent-volt">delighter</span>.</h2>
             <div class="three-col reveal" style="margin-top: var(--content-gap);">
-                <div class="feature-card" style="border-top: 3px solid var(--accent-lavender);">
-                    <span class="feature-num" style="color: var(--accent-lavender);">MUST-HAVE</span>
+                <div class="feature-card" style="border-top: 2px solid var(--accent-cyan);">
+                    <span class="feature-num" style="color: var(--accent-cyan);">MUST-HAVE</span>
                     <h3>Baseline expectations</h3>
-                    <ul class="bullet-list" style="margin-top: 0.3em;">
-                        <li>Real-time reservations</li>
-                        <li>Accurate charger info</li>
-                        <li>Secure payments</li>
+                    <ul class="bullet-list" style="margin-top: 0.5em;">
+                        <li>Real-time availability &amp; reservations</li>
+                        <li>Accurate charger info &amp; compatibility</li>
+                        <li>Secure payment processing</li>
                         <li>In-app navigation</li>
                         <li>Reliable host payouts</li>
                     </ul>
                 </div>
-                <div class="feature-card" style="border-top: 3px solid var(--accent-purple);">
+                <div class="feature-card" style="border-top: 2px solid var(--accent-volt);">
                     <span class="feature-num">PERFORMANCE</span>
-                    <h3>Linear satisfaction</h3>
-                    <ul class="bullet-list" style="margin-top: 0.3em;">
+                    <h3>Linear satisfaction drivers</h3>
+                    <ul class="bullet-list" style="margin-top: 0.5em;">
                         <li>Advanced search filters</li>
-                        <li>Flexible reservations</li>
+                        <li>Flexible reservation editing</li>
                         <li>Ratings &amp; reviews</li>
-                        <li>Dynamic pricing</li>
-                        <li>Earnings analytics</li>
+                        <li>Dynamic pricing for hosts</li>
+                        <li>Earnings analytics dashboard</li>
                     </ul>
                 </div>
-                <div class="feature-card" style="border-top: 3px solid var(--accent-mint);">
-                    <span class="feature-num" style="color: var(--accent-mint);">DELIGHTERS</span>
+                <div class="feature-card" style="border-top: 2px solid var(--accent-warn);">
+                    <span class="feature-num" style="color: var(--accent-warn);">DELIGHTERS</span>
                     <h3>Unexpected upside</h3>
-                    <ul class="bullet-list" style="margin-top: 0.3em;">
-                        <li>Plug-and-charge auto-pay</li>
+                    <ul class="bullet-list" style="margin-top: 0.5em;">
+                        <li>Plug-and-charge automation</li>
                         <li>Destination recommendations</li>
                         <li>Backup charging guarantee</li>
                         <li>Smart charger integration</li>
-                        <li>Automated gate access</li>
+                        <li>Automated access (gate codes)</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>13 — Kano Model</span>
+            <span>11 — Kano Model</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 15 — RISK & SAFETY
+         SLIDE 13 — RISK & SAFETY
          ==================================================================== -->
     <section class="slide" data-section="Risk">
         <div class="slide-header">
-            <span class="slide-number">14 / 19</span>
+            <span class="slide-number">12 / 18</span>
             <span class="slide-section">Risk &amp; Safety</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">A framework borrowed from Airbnb &amp; Uber</span>
-            <h2 class="reveal">Trust is built before the first session, <span class="accent-purple">not after an incident.</span></h2>
+            <h2 class="reveal">Trust is built before the first session, <span class="accent-volt">not after the first incident.</span></h2>
             <div class="two-col reveal" style="margin-top: var(--content-gap);">
                 <div>
-                    <h3 style="color: var(--accent-purple); margin-bottom: 0.6em;">→ Verification &amp; Insurance</h3>
+                    <h3 style="color: var(--accent-volt); font-size: clamp(0.9rem, 1.6vw, 1.2rem); margin-bottom: 0.6em;">→ Verification &amp; Insurance</h3>
                     <ul class="bullet-list">
-                        <li><strong>Hosts</strong> — Electrical installation verified by licensed electrician</li>
+                        <li><strong>Hosts</strong> — Electrical installation verified by licensed electrician before listing</li>
                         <li><strong>Drivers</strong> — Vehicle &amp; license verified at signup</li>
-                        <li><strong>Insurance</strong> — Liability covered through third-party partner</li>
-                        <li><strong>Mandatory checklist</strong> — Smoke detector, extinguisher, clear charger area</li>
+                        <li><strong>Insurance</strong> — Liability covered through third-party partner or built into transaction fee</li>
+                        <li><strong>Mandatory onboarding checklist</strong> — Smoke detector, dry-powder extinguisher, clear charger area</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 style="color: var(--accent-lavender); margin-bottom: 0.6em;">→ Shared Liability Model</h3>
+                    <h3 style="color: var(--accent-cyan); font-size: clamp(0.9rem, 1.6vw, 1.2rem); margin-bottom: 0.6em;">→ Shared Liability Model</h3>
                     <ul class="bullet-list">
-                        <li><strong>Host</strong> — Liable for known faulty equipment</li>
+                        <li><strong>Host</strong> — Liable for known faulty equipment or wiring</li>
                         <li><strong>Driver</strong> — Liable for incompatible chargers or tampering</li>
                         <li><strong>Platform</strong> — Liable for failure to enforce safety standards</li>
-                        <li><strong>24/7 emergency line</strong> — Active during every session</li>
+                        <li><strong>24/7 emergency line</strong> — Active during every session for both sides</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>14 — Risk &amp; Safety Framework</span>
+            <span>12 — Risk &amp; Safety Framework</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 16 — REVENUE MODEL
+         SLIDE 14 — PRODUCT SPECS
+         ==================================================================== -->
+    <section class="slide" data-section="Specs">
+        <div class="slide-header">
+            <span class="slide-number">13 / 18</span>
+            <span class="slide-section">Product Specifications</span>
+        </div>
+        <div class="slide-content">
+            <span class="eyebrow reveal">Measurable targets</span>
+            <h2 class="reveal">Specifications that <span class="accent-volt">define done.</span></h2>
+            <table class="data-table reveal" style="margin-top: var(--content-gap);">
+                <thead>
+                    <tr>
+                        <th>Specification</th>
+                        <th style="text-align: right;">Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Maximum preferred charger distance from user</td><td class="num highlight">200–300 m</td></tr>
+                    <tr><td>Main page load time</td><td class="num">&lt; 3 seconds</td></tr>
+                    <tr><td>Search results response time</td><td class="num">&lt; 5 seconds</td></tr>
+                    <tr><td>Payment confirmation time</td><td class="num">&lt; 10 seconds</td></tr>
+                    <tr><td>Booking process</td><td class="num">Max 5 steps</td></tr>
+                    <tr><td>System uptime</td><td class="num highlight">99%</td></tr>
+                    <tr><td>Notification delivery</td><td class="num">Within 1 minute</td></tr>
+                    <tr><td>Supported platforms</td><td class="num">Android &amp; iOS</td></tr>
+                    <tr><td>Host pricing control</td><td class="num">Per session / per hour</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="slide-footer">
+            <span class="brand-mark">PLUG &amp; GO</span>
+            <span>13 — Product Specifications</span>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 15 — REVENUE MODEL
          ==================================================================== -->
     <section class="slide" data-section="Revenue Model">
         <div class="slide-header">
-            <span class="slide-number">15 / 19</span>
+            <span class="slide-number">14 / 18</span>
             <span class="slide-section">Revenue Model</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Anatomy of a 5.00 JD charging session</span>
-            <h2 class="reveal">A <span class="accent-purple">15% commission</span> that works for everyone.</h2>
+            <h2 class="reveal">A <span class="accent-volt">15% commission</span> that works for everyone.</h2>
             <table class="data-table reveal" style="margin-top: var(--content-gap);">
                 <thead>
                     <tr>
@@ -1558,9 +1431,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Session electricity consumption</td><td class="num">20 kWh</td><td>Standard Level-2 home charger session</td></tr>
-                    <tr><td>Host electricity cost (TOU off-peak)</td><td class="num">2.16 JD</td><td>20 kWh × 0.108 JD/kWh</td></tr>
-                    <tr><td>Platform charge to driver</td><td class="num highlight">5.00 JD</td><td>Competitive vs. public stations (7–10 JD)</td></tr>
+                    <tr><td>Average session electricity consumption</td><td class="num">20 kWh</td><td>Standard Level-2 home charger session</td></tr>
+                    <tr><td>Electricity cost to host (TOU off-peak)</td><td class="num">2.16 JD</td><td>20 kWh × 0.108 JD/kWh</td></tr>
+                    <tr><td>Platform charge to driver per session</td><td class="num highlight">5.00 JD</td><td>Competitive vs. public stations (7–10 JD)</td></tr>
                     <tr><td>Host earnings per session</td><td class="num">4.25 JD</td><td>After commission and electricity</td></tr>
                     <tr><td>Platform commission per session</td><td class="num highlight">0.75 JD</td><td>15% × 5.00 JD</td></tr>
                     <tr><td>Sessions per active user / year</td><td class="num">156</td><td>3 sessions/week × 52 weeks</td></tr>
@@ -1570,21 +1443,21 @@
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>15 — Revenue Model</span>
+            <span>14 — Revenue Model</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 17 — 5-YEAR FINANCIALS
+         SLIDE 16 — 5-YEAR FINANCIALS
          ==================================================================== -->
     <section class="slide" data-section="Financials">
         <div class="slide-header">
-            <span class="slide-number">16 / 19</span>
+            <span class="slide-number">15 / 18</span>
             <span class="slide-section">5-Year Projections</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Profit &amp; loss · Years 0–5</span>
-            <h2 class="reveal">Cash-flow positive in <span class="accent-purple">Year 1.</span></h2>
+            <h2 class="reveal">Cash-flow positive in <span class="accent-volt">Year 1.</span></h2>
             <table class="data-table reveal" style="margin-top: var(--content-gap);">
                 <thead>
                     <tr>
@@ -1657,25 +1530,25 @@
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>16 — Cash Flow Projections</span>
+            <span>15 — Cash Flow Projections</span>
         </div>
     </section>
 
     <!-- ====================================================================
-         SLIDE 18 — KEY METRICS (HERO NUMBERS)
+         SLIDE 17 — KEY METRICS (HERO NUMBERS)
          ==================================================================== -->
     <section class="slide" data-section="Headline Metrics">
         <div class="slide-header">
-            <span class="slide-number">17 / 19</span>
+            <span class="slide-number">16 / 18</span>
             <span class="slide-section">Headline Metrics</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">The numbers that decide everything</span>
-            <h2 class="reveal">Built to <span class="accent-purple">return capital fast.</span></h2>
+            <h2 class="reveal">Built to <span class="accent-volt">return capital fast.</span></h2>
             <div class="four-col reveal" style="margin-top: var(--content-gap);">
                 <div class="mega-stat">
                     <div class="num">+269k</div>
-                    <div class="lbl">5-yr NPV (JD) @ 15% discount</div>
+                    <div class="lbl">5-year NPV (JD) @ 15% discount</div>
                 </div>
                 <div class="mega-stat">
                     <div class="num">1,910%</div>
@@ -1690,17 +1563,63 @@
                     <div class="lbl">Users to break even</div>
                 </div>
             </div>
-            <div class="reveal" style="margin-top: var(--content-gap); padding: clamp(1rem, 1.8vw, 1.5rem); background: rgba(168, 85, 247, 0.1); border-left: 4px solid var(--accent-purple); max-width: 80ch; margin-left: auto; margin-right: auto;">
-                <p class="lead">
-                    For every <span class="accent-purple">1 JD invested</span>, the platform returns
-                    <span class="accent-purple">19.10 JD</span> over five years. The asset-light marketplace
-                    model makes this possible.
+            <div class="reveal" style="margin-top: var(--content-gap); padding: clamp(0.8rem, 1.5vw, 1.2rem); background: rgba(196, 255, 61, 0.06); border-left: 3px solid var(--accent-volt); max-width: 80ch; margin-left: auto; margin-right: auto;">
+                <p style="color: var(--text-primary); font-size: var(--body-size);">
+                    For every <span class="accent-volt">1 JD invested</span>, the platform returns
+                    <span class="accent-volt">19.10 JD</span> over five years. The asset-light marketplace model is what makes this possible.
                 </p>
             </div>
         </div>
         <div class="slide-footer">
             <span class="brand-mark">PLUG &amp; GO</span>
-            <span>17 — NPV / ROI / Payback</span>
+            <span>16 — NPV / ROI / Payback</span>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 18 — SENSITIVITY ANALYSIS
+         ==================================================================== -->
+    <section class="slide" data-section="Sensitivity">
+        <div class="slide-header">
+            <span class="slide-number">17 / 18</span>
+            <span class="slide-section">Sensitivity Analysis</span>
+        </div>
+        <div class="slide-content">
+            <span class="eyebrow reveal">Stress-testing the assumptions</span>
+            <h2 class="reveal">Profitable across every realistic scenario.</h2>
+            <div class="three-col reveal" style="margin-top: var(--content-gap);">
+                <div class="stat-card">
+                    <span class="stat-label">User adoption</span>
+                    <h3 style="margin: 0.5em 0;">Half the users? Still profitable.</h3>
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        At 192 users (50% of target), Year 1 net income is still
+                        <span class="accent-volt">+8,364 JD</span>.
+                    </p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Commission rate</span>
+                    <h3 style="margin: 0.5em 0;">Drop to 10%? Still ~30k JD revenue.</h3>
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        Even at the lowest tested commission, Year 1 revenue
+                        <span class="accent-volt">covers all operating costs</span>.
+                    </p>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Pricing pressure</span>
+                    <h3 style="margin: 0.5em 0;">3.10 JD is the floor.</h3>
+                    <p style="font-size: var(--small-size); line-height: 1.5;">
+                        Base price of 5.00 JD gives a <span class="accent-volt">61% buffer</span> above
+                        the cost-covering minimum.
+                    </p>
+                </div>
+            </div>
+            <p class="reveal lead" style="margin-top: var(--content-gap); text-align: center; max-width: 65ch; margin-left: auto; margin-right: auto;">
+                The model has built-in margin for error. <span class="accent-volt">Even a weak launch covers costs.</span>
+            </p>
+        </div>
+        <div class="slide-footer">
+            <span class="brand-mark">PLUG &amp; GO</span>
+            <span>17 — Sensitivity Analysis</span>
         </div>
     </section>
 
@@ -1709,37 +1628,37 @@
          ==================================================================== -->
     <section class="slide" data-section="Impact">
         <div class="slide-header">
-            <span class="slide-number">18 / 19</span>
+            <span class="slide-number">18 / 18</span>
             <span class="slide-section">National Impact</span>
         </div>
         <div class="slide-content">
             <span class="eyebrow reveal">Beyond the balance sheet</span>
-            <h2 class="reveal">Aligned with <span class="accent-purple">Jordan Vision 2025</span> and the National EV Strategy.</h2>
+            <h2 class="reveal">Aligned with <span class="accent-volt">Jordan Vision 2025</span> and the National EV Strategy.</h2>
             <div class="four-col reveal" style="margin-top: var(--content-gap);">
                 <div class="stat-card">
                     <div class="stat-value">270k L</div>
                     <div class="stat-label">Gasoline displaced / yr</div>
-                    <div class="stat-sublabel">Year 1 alone — 1.2 M kWh of clean energy.</div>
+                    <div class="stat-sublabel">In Year 1 alone — 1.2 million kWh of clean energy.</div>
                 </div>
-                <div class="stat-card" style="border-left-color: var(--accent-lavender);">
-                    <div class="stat-value lavender">50%</div>
+                <div class="stat-card">
+                    <div class="stat-value cyan">50%</div>
                     <div class="stat-label">Renewable target by 2030</div>
-                    <div class="stat-sublabel">Hosts incentivized to install solar.</div>
+                    <div class="stat-sublabel">Incentivizes hosts to install solar to cut their costs.</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value">8–12</div>
                     <div class="stat-label">Direct jobs by Year 3</div>
-                    <div class="stat-sublabel">Plus indirect installer demand.</div>
+                    <div class="stat-sublabel">Support, ops, dev — plus indirect installer demand.</div>
                 </div>
-                <div class="stat-card" style="border-left-color: var(--accent-mint);">
-                    <div class="stat-value mint">4,600 JD</div>
+                <div class="stat-card">
+                    <div class="stat-value cyan">4,600 JD</div>
                     <div class="stat-label">Annual host income</div>
-                    <div class="stat-sublabel">Meaningful for Jordanian households.</div>
+                    <div class="stat-sublabel">At 3 sessions/day — meaningful for Jordanian households.</div>
                 </div>
             </div>
-            <p class="reveal lead" style="margin-top: var(--content-gap); max-width: 80ch;">
+            <p class="reveal lead" style="margin-top: var(--content-gap); max-width: 75ch;">
                 Reducing the fuel import bill. Creating micro-incomes in a country with ~50% youth unemployment.
-                Supporting the goal of <strong class="accent-purple">30% EV adoption by 2030.</strong>
+                Supporting the national goal of <strong class="accent-volt">30% EV adoption by 2030.</strong>
             </p>
         </div>
         <div class="slide-footer">
@@ -1753,9 +1672,7 @@
          ==================================================================== -->
     <section class="slide title-slide" data-section="Closing">
         <div class="slide-content">
-            <div class="logo-card reveal">
-                <img src="assets/logo.png" alt="Plug and Go logo" />
-            </div>
+            <div class="logo-mark reveal" aria-hidden="true"></div>
             <div class="title-mark reveal">Thank you · Questions welcome</div>
             <h1 class="mega-title reveal">
                 Plug In.<br><span class="charge">Drive On.</span>
@@ -1779,6 +1696,8 @@
     <script>
     /* ============================================================
        SLIDE PRESENTATION CONTROLLER
+       Handles: scroll-snap fade-in, keyboard nav, progress bar,
+       nav dots. Zero dependencies.
        ============================================================ */
     class SlidePresentation {
         constructor() {
@@ -1793,6 +1712,7 @@
             this.setupNavDots();
         }
 
+        /* Add .visible class when slide scrolls into view — triggers CSS reveal */
         setupIntersectionObserver() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1803,9 +1723,11 @@
                     }
                 });
             }, { threshold: [0, 0.55, 1] });
+
             this.slides.forEach(s => observer.observe(s));
         }
 
+        /* Arrow keys, Space, PageUp/Down, Home/End */
         setupKeyboardNav() {
             document.addEventListener('keydown', (e) => {
                 const key = e.key;
@@ -1829,6 +1751,7 @@
             this.slides[index].scrollIntoView({ behavior: 'smooth' });
         }
 
+        /* Progress bar width = (scroll position / total scrollable) */
         setupProgressBar() {
             const update = () => {
                 const total = document.documentElement.scrollHeight - window.innerHeight;
@@ -1839,6 +1762,7 @@
             update();
         }
 
+        /* Build nav dots — CLEAR FIRST to avoid duplicates on file re-open */
         setupNavDots() {
             this.navDotsContainer.innerHTML = '';
             this.slides.forEach((slide, i) => {
@@ -1857,6 +1781,7 @@
         }
     }
 
+    /* Boot once DOM is ready */
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
     } else {
